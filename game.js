@@ -13,5 +13,50 @@ function generateNumbers() {
  
 generateNumbers()
 // Iteration 3: Make the options button functional
-
+ let greater_than = document.getElementById('greater-than')
+ let equal_to = document.getElementById('equal-to')
+ let lesser_than = document.getElementById('lesser-than')
 // Iteration 4: Build a timer for the game
+greater_than.addEventListener("click", function() {
+    if (number1.innerText > number2.innerText) {
+        score++;
+        generateNumbers()
+    } else {
+        gameOver();
+    }
+});
+
+equal_to.addEventListener("click", function() {
+    if (number1.innerText === number2.innerText) {
+        score++;
+        generateNumbers()
+    } else {
+        gameOver();
+    }
+});
+
+lesser_than.addEventListener("click", function() {
+    if (number1.innerText < number2.innerText) {
+        score++;
+        generateNumbers()
+    } else {
+        gameOver();
+    }
+});
+
+
+
+
+let intervalID = setInterval(function () {
+    document.getElementById("timer").innerText = time
+    if (time <= 0) {
+        gameOver()
+    }
+    time--;
+},1000);
+
+function gameOver() {
+    clearInterval(intervalID);
+    localStorage.setItem("totalscore",score);
+    location.href = './gameover.html'
+}
